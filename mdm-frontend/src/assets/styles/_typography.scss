@@ -1,0 +1,80 @@
+.title {
+  &--primary {
+    font-weight: 800;
+    font-size: 40px;
+  }
+
+  &--secondary {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &--tertiary {
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+
+.paragraph {
+  &--lg {
+    font-size: 18px;
+  }
+
+  &--normal {
+    font-size: 16px;
+  }
+
+  &--md {
+    font-size: 14px;
+  }
+
+  &--sm {
+    font-size: 12px;
+  }
+}
+
+.text {
+  &--dark {
+    color: #2B2B2B;  }
+
+  &--red {
+    color: #eb5757;
+  }
+
+  &--grey {
+    color: #009393;
+  }
+
+  &--green {
+    color: #219653;
+  }
+
+  &--green-1 {
+    color: #009393;
+  }
+
+  &--extra-bold {
+    font-weight: 700;
+  }
+
+  &--bold {
+    font-weight: 600;
+  }
+
+  &--normal {
+    font-weight: 500;
+  }
+
+  &--nowrap {
+    white-space: nowrap;
+  }
+  &--center{
+    text-align: center;
+  }
+}
+
+.cursor {
+  &-pointer {
+    cursor: pointer;
+  }
+}

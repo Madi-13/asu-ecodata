@@ -1,0 +1,65 @@
+@import 'spacing';
+@import 'typography';
+@import 'position';
+@import 'sharable';
+@import 'animations';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --green-light: #2ccbcb;
+  --green: #009393;
+  --light: #ffffff;
+  --purple: #9b51e0;
+  --dark: #111111;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-style: normal;
+  font-weight: normal;
+  max-width: 100%;
+  overflow-x: hidden;
+  height: 100%;
+  scroll-behavior: smooth !important;
+  // @media (max-width: 1260px) {
+  //   // width < 1200?
+  //   font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
+  // }
+
+  // @media (max-width: 900px) {
+  //   // width < 900?
+  //   font-size: 50%; //1 rem = 8px, 8/16 = 50%
+  // }
+
+  @media (min-width: 1600px) {
+    font-size: 75%; //1rem = 12, 12/16
+  }
+}
+
+body {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: #111;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+#app {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.content-container {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
