@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $CI_PROJECT_NAME
+  labels:
+    app: $CI_PROJECT_NAME
+    maintainer: $GITLAB_USER_LOGIN
+spec:
+  replicas: $REPLICAS_NUMBER
+  selector:
+    matchLabels:
+      app: $CI_PROJECT_NAME
+  template:
+    metadata:
+      labels:
+        app: $CI_PROJECT_NAME
+        maintainer: $GITLAB_USER_LOGIN
+    spec:
+      volumes:
+        - name: config
+          secret:
+            secretName: config
+            items:
+              - key: conf.json
+                path: conf.json
+      containers:
+        - image: $REGHOST/$CI_PROJECT_NAME-$CI_PROJECT_ID/$CI_PROJECT_NAME:$CI_ENVIRONMENT_SLUG-$CI_PIPELINE_ID
+          imagePullPolicy: IfNotPresent
+          name: $CI_PROJECT_NAME
+          command: ["/app/run"]
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: config
+              mountPath: "/app/config/"
+              readOnly: true
+          readinessProbe: # readinessProbe - более щадящий режим убирает endpoint pod из сервисов;
+            httpGet:
+              path: /healthz
+              port: 9090
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe: # livenessProbe - этот убивает контейнер;
+            httpGet:
+              path: /healthz
+              port: 9090
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 9090
+            failureThreshold: 30
+            periodSeconds: 10
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              cpu: $CPU_LIMIT
+              memory: $MEMORY_LIMIT
+
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: registry
